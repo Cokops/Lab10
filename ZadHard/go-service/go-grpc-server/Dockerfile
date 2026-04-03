@@ -2,14 +2,14 @@ FROM golang:1.22-alpine
 
 WORKDIR /app
 
-COPY go.mod .
+# Копируем go.mod и go.sum
+COPY go.mod go.sum ./
 RUN go mod download
 
-COPY *.go .
+# Копируем все файлы (включая папку proto)
+COPY . .
 
-# Install protoc and gRPC plugins (if using .proto files)
-# RUN apk add --no-cache protobuf grpc-dev
-
+# Собираем приложение
 RUN go build -o main .
 
 EXPOSE 50051

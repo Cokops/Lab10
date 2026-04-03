@@ -2,7 +2,11 @@ syntax = "proto3";
 
 package proto;
 
-option go_package = "./proto";
+option go_package = "go-grpc-server/proto";
+
+service DataService {
+  rpc GetComplexData(DataRequest) returns (DataResponse);
+}
 
 message DataRequest {
   string timestamp = 1;
@@ -12,8 +16,4 @@ message DataResponse {
   int32 id = 1;
   string name = 2;
   map<string, string> details = 3;
-}
-
-service DataService {
-  rpc GetComplexData(DataRequest) returns (DataResponse);
 }

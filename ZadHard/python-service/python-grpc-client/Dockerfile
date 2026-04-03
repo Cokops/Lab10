@@ -6,10 +6,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 COPY *.py .
+COPY proto/ ./proto/
 
-# Copy generated gRPC stubs if they exist
-# COPY data_pb2.py data_pb2_grpc.py ./
-
-EXPOSE 50051
+# Если есть сгенерированные gRPC stubs
+# COPY *_pb2.py *_pb2_grpc.py ./
 
 CMD ["python", "client.py"]
