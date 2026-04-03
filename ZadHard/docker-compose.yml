@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  go-grpc-server:
+    build:
+      context: ./go-service/go-grpc-server
+      dockerfile: Dockerfile
+    ports:
+      - "50051:50051"
+    networks:
+      - grpc-network
+    restart: unless-stopped
+
+  python-grpc-client:
+    build:
+      context: ./python-service/python-grpc-client
+      dockerfile: Dockerfile
+    networks:
+      - grpc-network
+    restart: unless-stopped
+    depends_on:
+      - go-grpc-server
+
+networks:
+  grpc-network:
+    driver: bridge

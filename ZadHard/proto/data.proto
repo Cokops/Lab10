@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package proto;
+
+option go_package = ".;proto";
+
+// DataService provides a method to get complex data
+service DataService {
+  rpc GetComplexData(DataRequest) returns (DataResponse);
+}
+
+// DataRequest represents a request for data
+message DataRequest {
+  string timestamp = 1;
+}
+
+// DataResponse represents a complex data structure
+message DataResponse {
+  int32 id = 1;
+  string name = 2;
+  map<string, string> details = 3;
+}
